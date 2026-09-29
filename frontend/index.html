@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BookNest - Digital Library</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <h1>📚 BookNest</h1>
+
+        <p data-i18n="subtitle">
+            Digital Library Management System
+        </p>
+
+    </header>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+
+        <button
+            onclick="goHome()"
+            data-i18n="home"
+        >
+            Home
+        </button>
+
+        <button
+            onclick="goBooks()"
+            data-i18n="books"
+        >
+            Books
+        </button>
+
+        <button onclick="goRegister()" data-i18n="register">
+    Register
+</button>
+
+        <button
+            onclick="goLogin()"
+            data-i18n="login"
+        >
+            Login
+        </button>
+
+        <button
+            onclick="goMyBooks()"
+            data-i18n="myBooks"
+        >
+            My Borrowed Books
+        </button>
+
+        <button
+            onclick="logoutUser()"
+            data-i18n="logout"
+        >
+            Logout
+        </button>
+
+        <select
+            id="languageSelect"
+            onchange="changeLanguage()"
+        >
+
+            <option value="en">
+                🌐 English
+            </option>
+
+            <option value="ta">
+                🌐 தமிழ்
+            </option>
+
+            <option value="hi">
+                🌐 हिन्दी
+            </option>
+
+        </select>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+
+
+        <!-- ================= HOME ================= -->
+
+        <section id="homeSection">
+
+            <h2 data-i18n="welcome">
+                Welcome to BookNest
+            </h2>
+
+            <p data-i18n="tagline">
+                Explore, search and manage books easily
+                using our Digital Library.
+            </p>
+
+        </section>
+
+        <section id="registerSection" style="display: none;">
+
+    <h2>Register</h2>
+
+    <div class="add-book-form">
+
+        <input
+            type="text"
+            id="registerName"
+            placeholder="Name"
+        >
+
+        <input
+            type="email"
+            id="registerEmail"
+            placeholder="Email"
+        >
+
+        <input
+            type="password"
+            id="registerPassword"
+            placeholder="Password"
+        >
+
+        <button onclick="registerUser()">
+            Register
+        </button>
+
+        
+
+    </div>
+
+</section>
+
+
+        <!-- ================= BOOKS ================= -->
+
+        <section id="booksSection">
+
+            <h2 data-i18n="explore">
+                Explore Books
+            </h2>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by title, author or ISBN"
+                    data-i18n-placeholder="searchPlaceholder"
+                >
+
+                <select id="category">
+
+                    <option
+                        value=""
+                        data-i18n="allCategories"
+                    >
+                        All Categories
+                    </option>
+
+                    <option value="Programming">
+                        Programming
+                    </option>
+
+                    <option value="Database">
+                        Database
+                    </option>
+
+                    <option value="Science">
+                        Science
+                    </option>
+
+                    <option value="Technology">
+                        Technology
+                    </option>
+
+                </select>
+
+                <button
+                    onclick="searchBooks()"
+                    data-i18n="search"
+                >
+                    Search
+                </button>
+
+            </div>
+
+
+            <!-- ADD BOOK -->
+
+            <h2 data-i18n="addBook">
+                Add New Book
+            </h2>
+
+
+            <div class="add-book-form">
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Book Title"
+                    data-i18n-placeholder="bookTitle"
+                >
+
+                <input
+                    type="text"
+                    id="author"
+                    placeholder="Author"
+                    data-i18n-placeholder="author"
+                >
+
+                <input
+                    type="text"
+                    id="bookCategory"
+                    placeholder="Category"
+                    data-i18n-placeholder="category"
+                >
+
+                <input
+                    type="text"
+                    id="isbn"
+                    placeholder="ISBN"
+                    data-i18n-placeholder="isbn"
+                >
+
+                <textarea
+                    id="description"
+                    placeholder="Description"
+                    data-i18n-placeholder="description"
+                ></textarea>
+
+                <button
+                    onclick="addBook()"
+                    data-i18n="addBookButton"
+                >
+                    Add Book
+                </button>
+
+            </div>
+
+
+            <!-- AVAILABLE BOOKS -->
+
+            <h2 data-i18n="availableBooks">
+                Available Books
+            </h2>
+
+            <div id="bookList"></div>
+
+            <div id="pagination"></div>
+
+        </section>
+
+
+        <!-- ================= MY BOOKS ================= -->
+
+        <section
+            id="myBooksSection"
+            style="display: none;"
+        >
+
+            <h2 data-i18n="myBooks">
+                My Borrowed Books
+            </h2>
+
+            <div id="myBooksList"></div>
+
+        </section>
+
+
+        <!-- ================= LOGIN ================= -->
+
+        <section
+            id="loginSection"
+            style="display: none;"
+        >
+
+            <h2 data-i18n="login">
+                Login
+            </h2>
+
+
+            <div class="add-book-form">
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Email"
+                    data-i18n-placeholder="email"
+                >
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Password"
+                    data-i18n-placeholder="password"
+                >
+
+                <button
+                    onclick="loginUser()"
+                    data-i18n="login"
+                >
+                    Login
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
